@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
+		55234EF11E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
+		55234EF21E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
+		55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
+		55234EF51E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
+		55234EF61E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
 		553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6381E4D9EE400C97F6B /* AppDelegate.swift */; };
 		553AA63B1E4D9EE400C97F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA63A1E4D9EE400C97F6B /* ViewController.swift */; };
 		553AA63E1E4D9EE400C97F6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553AA63C1E4D9EE400C97F6B /* Main.storyboard */; };
@@ -14,6 +20,12 @@
 		553AA6431E4D9EE400C97F6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553AA6411E4D9EE400C97F6B /* LaunchScreen.storyboard */; };
 		553AA64E1E4D9EE400C97F6B /* YQRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA64D1E4D9EE400C97F6B /* YQRefreshTests.swift */; };
 		553AA6591E4D9EE400C97F6B /* YQRefreshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6581E4D9EE400C97F6B /* YQRefreshUITests.swift */; };
+		553AA6681E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
+		553AA6691E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
+		553AA66A1E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
+		553AA66C1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
+		553AA66D1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
+		553AA66E1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRefreshHeader.swift; sourceTree = "<group>"; };
+		55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefreshFooter.swift; sourceTree = "<group>"; };
 		553AA6351E4D9EE400C97F6B /* YQRefresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YQRefresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553AA6381E4D9EE400C97F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		553AA63A1E4D9EE400C97F6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +61,8 @@
 		553AA6541E4D9EE400C97F6B /* YQRefreshUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YQRefreshUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		553AA6581E4D9EE400C97F6B /* YQRefreshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YQRefreshUITests.swift; sourceTree = "<group>"; };
 		553AA65A1E4D9EE400C97F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		553AA6671E4DA37300C97F6B /* YQRefresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefresher.swift; sourceTree = "<group>"; };
+		553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefreshHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +93,7 @@
 		553AA62C1E4D9EE400C97F6B = {
 			isa = PBXGroup;
 			children = (
+				553AA6661E4DA01C00C97F6B /* Classes */,
 				553AA6371E4D9EE400C97F6B /* YQRefresh */,
 				553AA64C1E4D9EE400C97F6B /* YQRefreshTests */,
 				553AA6571E4D9EE400C97F6B /* YQRefreshUITests */,
@@ -103,6 +120,7 @@
 				553AA63F1E4D9EE400C97F6B /* Assets.xcassets */,
 				553AA6411E4D9EE400C97F6B /* LaunchScreen.storyboard */,
 				553AA6441E4D9EE400C97F6B /* Info.plist */,
+				55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */,
 			);
 			path = YQRefresh;
 			sourceTree = "<group>";
@@ -123,6 +141,16 @@
 				553AA65A1E4D9EE400C97F6B /* Info.plist */,
 			);
 			path = YQRefreshUITests;
+			sourceTree = "<group>";
+		};
+		553AA6661E4DA01C00C97F6B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				553AA6671E4DA37300C97F6B /* YQRefresher.swift */,
+				553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */,
+				55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +221,7 @@
 				TargetAttributes = {
 					553AA6341E4D9EE400C97F6B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 97F5F2AF3C;
 						ProvisioningStyle = Automatic;
 					};
 					553AA6481E4D9EE400C97F6B = {
@@ -259,7 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553AA6681E4DA37300C97F6B /* YQRefresher.swift in Sources */,
 				553AA63B1E4D9EE400C97F6B /* ViewController.swift in Sources */,
+				55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
+				553AA66C1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
+				55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55234EF51E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				553AA64E1E4D9EE400C97F6B /* YQRefreshTests.swift in Sources */,
+				553AA66D1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
+				553AA6691E4DA37300C97F6B /* YQRefresher.swift in Sources */,
+				55234EF11E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +313,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55234EF61E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				553AA6591E4D9EE400C97F6B /* YQRefreshUITests.swift in Sources */,
+				553AA66E1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
+				553AA66A1E4DA37300C97F6B /* YQRefresher.swift in Sources */,
+				55234EF21E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,10 +451,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 97F5F2AF3C;
 				INFOPLIST_FILE = YQRefresh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyq.YQRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -422,7 +468,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 97F5F2AF3C;
 				INFOPLIST_FILE = YQRefresh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyq.YQRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -503,6 +552,7 @@
 				553AA65F1E4D9EE400C97F6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		553AA6601E4D9EE400C97F6B /* Build configuration list for PBXNativeTarget "YQRefreshTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +561,7 @@
 				553AA6621E4D9EE400C97F6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		553AA6631E4D9EE400C97F6B /* Build configuration list for PBXNativeTarget "YQRefreshUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +570,7 @@
 				553AA6651E4D9EE400C97F6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
