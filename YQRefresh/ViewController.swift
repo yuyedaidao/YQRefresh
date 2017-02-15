@@ -12,16 +12,17 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 90, right: 0)
         self.tableView.yq.header = YQRefreshHeader{[weak self] () in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
                 self?.tableView.yq.header?.endRefreshing()
             }
         }
-        self.tableView.yq.header?.beginRefreshing()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-            self.tableView.yq.header?.endRefreshing()
+        self.tableView.yq.footer = YQRefreshFooter{[weak self] () in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+                self?.tableView.yq.footer?.endRefreshing()
+            }
         }
     }
 
@@ -30,6 +31,13 @@ class ViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)")!
+        return cell
+    }
 }
 

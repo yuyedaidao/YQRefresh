@@ -34,6 +34,7 @@ open class YQRefreshHeader: UIView, YQRefresher{
                     self.scrollView?.contentOffset.y = -top
                 }, completion: { (isFinished) in
                     if let action = self.action {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: YQNotificatonHeaderRefresh), object: nil)
                         action()
                     }
                 })
@@ -47,7 +48,7 @@ open class YQRefreshHeader: UIView, YQRefresher{
     weak var scrollView: UIScrollView? {
         didSet {
             if let scroll = scrollView {
-                scroll.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
+                scroll.addObserver(self, forKeyPath: YQKVOContentOffset, options: .new, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
             }
         }
     }
@@ -103,5 +104,16 @@ open class YQRefreshHeader: UIView, YQRefresher{
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    open override func willMove(toSuperview newSuperview: UIView?) {
+        func removeObservers(on view: UIView?) {
+            view?.removeObserver(self, forKeyPath: YQKVOContentOffset, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
+        }
+        if let scroll = newSuperview as? UIScrollView {
+            self.scrollView = scroll
+        } else {
+            removeObservers(on: self.superview)
+        }
     }
 }

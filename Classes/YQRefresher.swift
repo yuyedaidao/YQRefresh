@@ -15,8 +15,14 @@ public enum YQRefreshState {
     case noMore
 }
 
+var YQKVOContentOffset = "contentOffset"
+var YQKVOContentSize = "contentSize"
+
 let YQRefresherHeight: CGFloat = 60.0
 let YQRefresherAnimationDuration = 0.25
+
+let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
+
 typealias YQRefreshAction = (Void)->Void
 
 protocol YQRefresher {
@@ -37,6 +43,10 @@ public protocol YQRefreshActor {
     func setState(_ state: YQRefreshState)
     func setPullingPrecent(_ present: Double)
 }
+
+//public protocol YQRefreshFooterActor: YQRefreshActor {
+//    func hasNoMore()
+//}
 
 protocol YQRefreshable {
     var header: YQRefresher? {get set}
@@ -70,7 +80,6 @@ public struct YQRefreshContainer: YQRefreshable {
                 self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
                 self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
                 self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top))
-                refresher.scrollView = self.base
             }
         }
     }
@@ -81,7 +90,22 @@ public struct YQRefreshContainer: YQRefreshable {
         }
         
         set {
-            
+            if let refresher = self.base.viewWithTag(footerTag) {
+                refresher.removeFromSuperview()
+            }
+            if let refresher = newValue as? YQRefreshFooter {
+                refresher.tag = footerTag
+                refresher.backgroundColor = UIColor.orange
+                refresher.originalInset = self.base.contentInset
+                refresher.translatesAutoresizingMaskIntoConstraints = false
+                self.base.addSubview(refresher)
+                refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
+                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
+                self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
+                refresher.topSpaceConstraint = NSLayoutConstraint(item: refresher, attribute: .top, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: 10000)
+                self.base.addConstraint(refresher.topSpaceConstraint)
+            }
+
         }
     }
 }
