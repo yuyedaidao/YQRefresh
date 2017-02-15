@@ -72,7 +72,6 @@ public struct YQRefreshContainer: YQRefreshable {
             }
             if let refresher =  newValue as? YQRefreshHeader {
                 refresher.tag = headerTag
-                refresher.backgroundColor = UIColor.blue
                 refresher.translatesAutoresizingMaskIntoConstraints = false
                 refresher.originalInset = self.base.contentInset
                 self.base.addSubview(refresher)
@@ -95,7 +94,6 @@ public struct YQRefreshContainer: YQRefreshable {
             }
             if let refresher = newValue as? YQRefreshFooter {
                 refresher.tag = footerTag
-                refresher.backgroundColor = UIColor.orange
                 refresher.originalInset = self.base.contentInset
                 refresher.translatesAutoresizingMaskIntoConstraints = false
                 self.base.addSubview(refresher)
