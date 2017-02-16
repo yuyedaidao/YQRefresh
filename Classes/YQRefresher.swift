@@ -67,7 +67,7 @@ public struct YQRefreshContainer: YQRefreshable {
         self.base = base
     }
     
-    var header: YQRefresherHeader? {
+    public var header: YQRefresherHeader? {
         get {
             return self.base.viewWithTag(YQHeaderTag) as? YQRefresherHeader
         }
@@ -82,7 +82,7 @@ public struct YQRefreshContainer: YQRefreshable {
         }
     }
     
-    var footer: YQRefresherFooter? {
+    public var footer: YQRefresherFooter? {
         get {
             return self.base.viewWithTag(YQFooterTag) as? YQRefresherFooter
         }
@@ -101,7 +101,7 @@ public struct YQRefreshContainer: YQRefreshable {
 
 extension UIScrollView {
    
-    var yq:YQRefreshContainer {
+    public var yq:YQRefreshContainer {
         get {
             return YQRefreshContainer(self)
         }
