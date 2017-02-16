@@ -8,15 +8,16 @@
 
 import UIKit
 
-open class YQRefreshHeader: UIView, YQRefresher{
+
+open class YQRefreshHeader: UIView, YQRefresherHeader{
     
-    var actor: YQRefreshActor?
-    var action: YQRefreshAction?
-    var refresherHeight: CGFloat = YQRefresherHeight
-    var originalInset: UIEdgeInsets = UIEdgeInsets.zero
-    var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
+    public var actor: YQRefreshActor?
+    public var action: YQRefreshAction?
+    public var refresherHeight: CGFloat = YQRefresherHeight
+    public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
+    public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
     
-    var state: YQRefreshState = .default {
+    public var state: YQRefreshState = .default {
         didSet {
             switch state {
             case .default:
@@ -45,28 +46,39 @@ open class YQRefreshHeader: UIView, YQRefresher{
             self.actor?.setState(state)
         }
     }
-    weak var scrollView: UIScrollView? {
+    public weak var scrollView: UIScrollView? {
         didSet {
             if let scroll = scrollView {
                 scroll.addObserver(self, forKeyPath: YQKVOContentOffset, options: .new, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
             }
         }
     }
-    var pullingPercent: Double = 0 {
+    public var pullingPercent: Double = 0 {
         didSet {
             self.actor?.setPullingPrecent(pullingPercent)
         }
     }
 
     
-    func beginRefreshing() {
+    public func beginRefreshing() {
         self.pullingPercent = 1
         self.state = .refreshing
     }
     
-    func endRefreshing() {
+    public func endRefreshing() {
         self.state = .default
         self.pullingPercent = 0
+    }
+    
+    public func addInto(_ view: UIScrollView) {
+        self.tag = YQHeaderTag
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.originalInset = view.contentInset
+        view.addSubview(self)
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
+        view.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: -self.originalInset.top))
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -96,7 +108,7 @@ open class YQRefreshHeader: UIView, YQRefresher{
         }
     }
 
-    init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
+    public init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
         super.init(frame: CGRect.zero)

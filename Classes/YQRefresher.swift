@@ -20,12 +20,13 @@ var YQKVOContentSize = "contentSize"
 
 let YQRefresherHeight: CGFloat = 60.0
 let YQRefresherAnimationDuration = 0.25
-
+let YQHeaderTag = 1008601
+let YQFooterTag = 1008602
 let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
 
-typealias YQRefreshAction = (Void)->Void
+public typealias YQRefreshAction = (Void)->Void
 
-protocol YQRefresher {
+public protocol YQRefresher{
     var state: YQRefreshState {get set}
     weak var scrollView: UIScrollView? {get set}
     var pullingPercent: Double {get set}
@@ -35,6 +36,7 @@ protocol YQRefresher {
     var actor: YQRefreshActor? {get set}
     var action: YQRefreshAction? {get set}
     var originalInset: UIEdgeInsets {get set}
+    func addInto(_ view: UIScrollView)
     func beginRefreshing()
     func endRefreshing()
 }
@@ -47,61 +49,50 @@ public protocol YQRefreshActor {
 //public protocol YQRefreshFooterActor: YQRefreshActor {
 //    func hasNoMore()
 //}
+public protocol YQRefresherHeader: YQRefresher {}
+
+public protocol YQRefresherFooter: YQRefresher {
+    func hasNoMore()
+}
 
 protocol YQRefreshable {
-    var header: YQRefresher? {get set}
-    var footer: YQRefresher? {get set}
+    var header: YQRefresherHeader? {get set}
+    var footer: YQRefresherFooter? {get set}
 }
 
 public struct YQRefreshContainer: YQRefreshable {
     let base:UIScrollView
-    let headerTag = 1008601
-    let footerTag = 1008602
+    
     init(_ base: UIScrollView) {
         self.base = base
     }
     
-    var header: YQRefresher? {
+    var header: YQRefresherHeader? {
         get {
-            return self.base.viewWithTag(headerTag) as? YQRefresher
+            return self.base.viewWithTag(YQHeaderTag) as? YQRefresherHeader
         }
         
         set {
-            if let refresher = self.base.viewWithTag(headerTag) {
+            if let refresher = self.base.viewWithTag(YQHeaderTag) {
                 refresher.removeFromSuperview()
             }
-            if let refresher =  newValue as? YQRefreshHeader {
-                refresher.tag = headerTag
-                refresher.translatesAutoresizingMaskIntoConstraints = false
-                refresher.originalInset = self.base.contentInset
-                self.base.addSubview(refresher)
-                refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top))
+            if let refresher = newValue {
+                refresher.addInto(self.base)
             }
         }
     }
     
-    var footer: YQRefresher? {
+    var footer: YQRefresherFooter? {
         get {
-            return self.base.viewWithTag(footerTag) as? YQRefresher
+            return self.base.viewWithTag(YQFooterTag) as? YQRefresherFooter
         }
         
         set {
-            if let refresher = self.base.viewWithTag(footerTag) {
+            if let refresher = self.base.viewWithTag(YQFooterTag) {
                 refresher.removeFromSuperview()
             }
-            if let refresher = newValue as? YQRefreshFooter {
-                refresher.tag = footerTag
-                refresher.originalInset = self.base.contentInset
-                refresher.translatesAutoresizingMaskIntoConstraints = false
-                self.base.addSubview(refresher)
-                refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
-                refresher.topSpaceConstraint = NSLayoutConstraint(item: refresher, attribute: .top, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: 10000)
-                self.base.addConstraint(refresher.topSpaceConstraint)
+            if let refresher = newValue {
+                refresher.addInto(self.base)
             }
 
         }

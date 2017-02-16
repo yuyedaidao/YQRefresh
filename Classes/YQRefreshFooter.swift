@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class YQRefreshFooter: UIView, YQRefresher {
+public class YQRefreshFooter: UIView, YQRefresherFooter {
 
-    var actor: YQRefreshActor?
-    var action: YQRefreshAction?
-    var refresherHeight: CGFloat = YQRefresherHeight
-    var originalInset: UIEdgeInsets = UIEdgeInsets.zero
-    var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
-    var topSpaceConstraint: NSLayoutConstraint!
-    var headerRefreshObserver: NSObjectProtocol?
+    public var actor: YQRefreshActor?
+    public var action: YQRefreshAction?
+    public var refresherHeight: CGFloat = YQRefresherHeight
+    public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
+    public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
+    public var topSpaceConstraint: NSLayoutConstraint!
+    public var headerRefreshObserver: NSObjectProtocol?
     
-    var state: YQRefreshState = .default {
+    public var state: YQRefreshState = .default {
         didSet {
             switch state {
             case .default:
@@ -43,7 +43,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
             self.actor?.setState(state)
         }
     }
-    weak var scrollView: UIScrollView? {
+    public weak var scrollView: UIScrollView? {
         didSet {
             if let scroll = scrollView {
                 scroll.addObserver(self, forKeyPath: YQKVOContentOffset, options: .new, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
@@ -52,13 +52,13 @@ public class YQRefreshFooter: UIView, YQRefresher {
         }
     }
     
-    var pullingPercent: Double = 0 {
+    public var pullingPercent: Double = 0 {
         didSet {
             self.actor?.setPullingPrecent(pullingPercent)
         }
     }
     
-    init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
+    public init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
         super.init(frame: CGRect.zero)
@@ -140,17 +140,29 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     //public
     
-    func beginRefreshing() {
+    public func hasNoMore() {
+        self.state = .noMore
+    }
+    
+    public func addInto(_ view: UIScrollView) {
+        self.tag = YQFooterTag
+        self.originalInset = view.contentInset
+        self.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self)
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
+        view.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0))
+        self.topSpaceConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 10000)
+        view.addConstraint(self.topSpaceConstraint)
+    }
+    
+    public func beginRefreshing() {
         self.pullingPercent = 1
         self.state = .refreshing
     }
     
-    func endRefreshing() {
+    public func endRefreshing() {
         self.state = .default
         self.pullingPercent = 0
-    }
-    
-    func hasNoMore() {
-        self.state = .noMore
     }
 }
