@@ -40,7 +40,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
             default:
                 break
             }
-            self.actor?.setState(state)
+            self.actor?.state = state
         }
     }
     weak var scrollView: UIScrollView? {
@@ -54,7 +54,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     var pullingPercent: Double = 0 {
         didSet {
-            self.actor?.setPullingPrecent(pullingPercent)
+            self.actor?.pullingPrecent = pullingPercent
         }
     }
     

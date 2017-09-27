@@ -9,22 +9,13 @@
 import UIKit
 
 class CustomActor: UIView, YQRefreshActor {
+    var state: YQRefreshState = .default
+    
+    var pullingPrecent: Double = 0
+    
     
     var label: UILabel = UILabel()
-    
-    
-    func setState(_ state: YQRefreshState) {
-        switch state {
-        case .default:
-            break
-        default:
-            break
-        }
-    }
-    
-    func setPullingPrecent(_ present: Double) {
-        
-    }
+
     
 }
 

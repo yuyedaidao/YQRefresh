@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
@@ -19,11 +20,14 @@ class ViewController: UITableViewController {
                 self?.tableView.yq.header?.endRefreshing()
             }
         }
+
         self.tableView.yq.footer = YQRefreshFooter{[weak self] () in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
                 self?.tableView.yq.footer?.endRefreshing()
             }
         }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,12 +35,13 @@ class ViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)")!
+        cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
 }

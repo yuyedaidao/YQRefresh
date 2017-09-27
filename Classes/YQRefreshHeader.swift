@@ -8,9 +8,19 @@
 
 import UIKit
 
-open class YQRefreshHeader: UIView, YQRefresher{
+open class YQRefreshHeader: UIView, YQRefresher {
     
-    var actor: YQRefreshActor?
+    var actor: YQRefreshActor? {
+        didSet {
+            guard let a = actor as? UIView else {
+                return
+            }
+            if let old = oldValue as? UIView {
+                old.removeFromSuperview()
+            }
+            addSubview(a)
+        }
+    }
     var action: YQRefreshAction?
     var refresherHeight: CGFloat = YQRefresherHeight
     var originalInset: UIEdgeInsets = UIEdgeInsets.zero
@@ -42,7 +52,7 @@ open class YQRefreshHeader: UIView, YQRefresher{
             default:
                 break
             }
-            self.actor?.setState(state)
+            self.actor?.state = state
         }
     }
     weak var scrollView: UIScrollView? {
@@ -54,7 +64,7 @@ open class YQRefreshHeader: UIView, YQRefresher{
     }
     var pullingPercent: Double = 0 {
         didSet {
-            self.actor?.setPullingPrecent(pullingPercent)
+            self.actor?.pullingPrecent = pullingPercent
         }
     }
 
@@ -76,34 +86,51 @@ open class YQRefreshHeader: UIView, YQRefresher{
                 return
             }
             let offsetY = scroll.contentOffset.y
-            guard offsetY < -self.originalInset.top else {
-                return
-            }
             let triggerOffset = -self.originalInset.top - self.refresherHeight
-            let percent = (-self.originalInset.top - offsetY - self.pullingPercentOffset) / (self.refresherHeight - self.pullingPercentOffset)
-            self.pullingPercent = max(min(Double(percent), 1), 0)
             if scroll.isDragging {
-                if self.state == .default && offsetY <= triggerOffset{
+                if self.state == .default {
                     self.state = .pulling
-                } else if self.state == .pulling && offsetY > triggerOffset{
-                    self.state = .default
                 }
             } else {
                 if self.state == .pulling {
-                    self.beginRefreshing()
+                    if offsetY <= triggerOffset {
+                        self.beginRefreshing()
+                    } else if offsetY >= -self.originalInset.top  {
+                        self.state = .default
+                    }
                 }
             }
+            guard offsetY < -self.originalInset.top else {
+                return
+            }
+            let percent = (-self.originalInset.top - offsetY - self.pullingPercentOffset) / (self.refresherHeight - self.pullingPercentOffset)
+            self.pullingPercent = max(min(Double(percent), 1), 0)
         }
     }
 
-    init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
+    init (_ actor: YQRefreshActor? = PacmanActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 45, height: 30))), _ action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
+        
         super.init(frame: CGRect.zero)
+        if let a = self.actor as? UIView {
+            self.addSubview(a)
+        }
+       
     }
+    
+    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let actor = self.actor as? UIView else {
+            return
+        }
+        actor.center = CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
     open override func willMove(toSuperview newSuperview: UIView?) {

@@ -23,7 +23,7 @@ let YQRefresherAnimationDuration = 0.25
 
 let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
 
-typealias YQRefreshAction = (Void)->Void
+typealias YQRefreshAction = ()->Void
 
 protocol YQRefresher {
     var state: YQRefreshState {get set}
@@ -39,14 +39,10 @@ protocol YQRefresher {
     func endRefreshing()
 }
 
-public protocol YQRefreshActor {
-    func setState(_ state: YQRefreshState)
-    func setPullingPrecent(_ present: Double)
+public protocol YQRefreshActor where Self: UIView {
+    var state: YQRefreshState {get set}
+    var pullingPrecent: Double {get set}
 }
-
-//public protocol YQRefreshFooterActor: YQRefreshActor {
-//    func hasNoMore()
-//}
 
 protocol YQRefreshable {
     var header: YQRefresher? {get set}

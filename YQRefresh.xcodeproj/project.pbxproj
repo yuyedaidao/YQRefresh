@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2107E6BD1F7B7E5600A7444D /* PacmanActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */; };
 		55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
-		55234EF11E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
-		55234EF21E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
 		55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
-		55234EF51E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
-		55234EF61E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
 		553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6381E4D9EE400C97F6B /* AppDelegate.swift */; };
 		553AA63B1E4D9EE400C97F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA63A1E4D9EE400C97F6B /* ViewController.swift */; };
 		553AA63E1E4D9EE400C97F6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553AA63C1E4D9EE400C97F6B /* Main.storyboard */; };
@@ -21,11 +18,7 @@
 		553AA64E1E4D9EE400C97F6B /* YQRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA64D1E4D9EE400C97F6B /* YQRefreshTests.swift */; };
 		553AA6591E4D9EE400C97F6B /* YQRefreshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6581E4D9EE400C97F6B /* YQRefreshUITests.swift */; };
 		553AA6681E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
-		553AA6691E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
-		553AA66A1E4DA37300C97F6B /* YQRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6671E4DA37300C97F6B /* YQRefresher.swift */; };
 		553AA66C1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
-		553AA66D1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
-		553AA66E1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacmanActor.swift; sourceTree = "<group>"; };
 		55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRefreshHeader.swift; sourceTree = "<group>"; };
 		55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefreshFooter.swift; sourceTree = "<group>"; };
 		553AA6351E4D9EE400C97F6B /* YQRefresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YQRefresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +143,7 @@
 				553AA6671E4DA37300C97F6B /* YQRefresher.swift */,
 				553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */,
 				55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */,
+				2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -293,6 +288,7 @@
 				55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 				553AA66C1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
 				55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
+				2107E6BD1F7B7E5600A7444D /* PacmanActor.swift in Sources */,
 				553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,11 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55234EF51E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				553AA64E1E4D9EE400C97F6B /* YQRefreshTests.swift in Sources */,
-				553AA66D1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
-				553AA6691E4DA37300C97F6B /* YQRefresher.swift in Sources */,
-				55234EF11E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,11 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55234EF61E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				553AA6591E4D9EE400C97F6B /* YQRefreshUITests.swift in Sources */,
-				553AA66E1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
-				553AA66A1E4DA37300C97F6B /* YQRefresher.swift in Sources */,
-				55234EF21E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
