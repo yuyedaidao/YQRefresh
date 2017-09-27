@@ -59,45 +59,47 @@ public struct YQRefreshContainer: YQRefreshable {
     
     var header: YQRefresher? {
         get {
-            return self.base.viewWithTag(headerTag) as? YQRefresher
+            return base.viewWithTag(headerTag) as? YQRefresher
         }
         
         set {
-            if let refresher = self.base.viewWithTag(headerTag) {
+            if let refresher = base.viewWithTag(headerTag) {
                 refresher.removeFromSuperview()
             }
             if let refresher =  newValue as? YQRefreshHeader {
                 refresher.tag = headerTag
                 refresher.translatesAutoresizingMaskIntoConstraints = false
-                refresher.originalInset = self.base.contentInset
-                self.base.addSubview(refresher)
+                refresher.originalInset = base.contentInset
+                base.addSubview(refresher)
                 refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top))
+                base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: base, attribute: .width, multiplier: 1, constant: 0))
+                base.addConstraint(NSLayoutConstraint(item: base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
+                base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top))
+                base.superview?.setNeedsLayout()
+                base.superview?.layoutIfNeeded()
             }
         }
     }
     
     var footer: YQRefresher? {
         get {
-            return self.base.viewWithTag(footerTag) as? YQRefresher
+            return base.viewWithTag(footerTag) as? YQRefresher
         }
         
         set {
-            if let refresher = self.base.viewWithTag(footerTag) {
+            if let refresher = base.viewWithTag(footerTag) {
                 refresher.removeFromSuperview()
             }
             if let refresher = newValue as? YQRefreshFooter {
                 refresher.tag = footerTag
-                refresher.originalInset = self.base.contentInset
+                refresher.originalInset = base.contentInset
                 refresher.translatesAutoresizingMaskIntoConstraints = false
-                self.base.addSubview(refresher)
+                base.addSubview(refresher)
                 refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
-                self.base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: self.base, attribute: .width, multiplier: 1, constant: 0))
-                self.base.addConstraint(NSLayoutConstraint(item: self.base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
-                refresher.topSpaceConstraint = NSLayoutConstraint(item: refresher, attribute: .top, relatedBy: .equal, toItem: self.base, attribute: .top, multiplier: 1, constant: 10000)
-                self.base.addConstraint(refresher.topSpaceConstraint)
+                base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: base, attribute: .width, multiplier: 1, constant: 0))
+                base.addConstraint(NSLayoutConstraint(item: base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
+                refresher.topSpaceConstraint = NSLayoutConstraint(item: refresher, attribute: .top, relatedBy: .equal, toItem: base, attribute: .top, multiplier: 1, constant: 10000)
+                base.addConstraint(refresher.topSpaceConstraint)
             }
 
         }

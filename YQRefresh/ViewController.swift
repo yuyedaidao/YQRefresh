@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        self.tableView.addObserver(self, forKeyPath: "contentInset", options: .new, context: nil)
         self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 90, right: 0)
         self.tableView.yq.header = YQRefreshHeader{[weak self] () in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
@@ -43,6 +44,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)")!
         cell.textLabel?.text = "\(indexPath.row)"
         return cell
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print(change?[NSKeyValueChangeKey.newKey])
     }
 }
 

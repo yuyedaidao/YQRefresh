@@ -30,7 +30,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
         didSet {
             switch state {
             case .default:
-                if self.scrollView?.contentInset.top != self.originalInset.top {
+                if scrollView?.contentInset.top != originalInset.top {
                     UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                         let top = self.originalInset.top
                         self.scrollView?.contentInset.top = top
@@ -52,7 +52,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
             default:
                 break
             }
-            self.actor?.state = state
+            actor?.state = state
         }
     }
     weak var scrollView: UIScrollView? {
@@ -64,47 +64,47 @@ open class YQRefreshHeader: UIView, YQRefresher {
     }
     var pullingPercent: Double = 0 {
         didSet {
-            self.actor?.pullingPrecent = pullingPercent
+            actor?.pullingPrecent = pullingPercent
         }
     }
 
     
     func beginRefreshing() {
-        self.pullingPercent = 1
-        self.state = .refreshing
+        pullingPercent = 1
+        state = .refreshing
     }
     
     func endRefreshing() {
-        self.state = .default
-        self.pullingPercent = 0
+        state = .default
+        pullingPercent = 0
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if let scroll = self.scrollView {
+        if let scroll = scrollView {
             guard state != .refreshing else {
                 return
             }
             let offsetY = scroll.contentOffset.y
-            let triggerOffset = -self.originalInset.top - self.refresherHeight
+            let triggerOffset = -originalInset.top - refresherHeight
             if scroll.isDragging {
-                if self.state == .default {
-                    self.state = .pulling
+                if state == .default {
+                    state = .pulling
                 }
             } else {
-                if self.state == .pulling {
+                if state == .pulling {
                     if offsetY <= triggerOffset {
-                        self.beginRefreshing()
-                    } else if offsetY >= -self.originalInset.top  {
-                        self.state = .default
+                        beginRefreshing()
+                    } else if offsetY >= -originalInset.top  {
+                        state = .default
                     }
                 }
             }
-            guard offsetY < -self.originalInset.top else {
+            guard offsetY < -originalInset.top else {
                 return
             }
-            let percent = (-self.originalInset.top - offsetY - self.pullingPercentOffset) / (self.refresherHeight - self.pullingPercentOffset)
-            self.pullingPercent = max(min(Double(percent), 1), 0)
+            let percent = (-originalInset.top - offsetY - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
+            pullingPercent = max(min(Double(percent), 1), 0)
         }
     }
 
@@ -113,13 +113,10 @@ open class YQRefreshHeader: UIView, YQRefresher {
         self.action = action
         
         super.init(frame: CGRect.zero)
-        if let a = self.actor as? UIView {
-            self.addSubview(a)
+        if let a = actor as? UIView {
+            addSubview(a)
         }
-       
     }
-    
-    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -127,7 +124,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        guard let actor = self.actor as? UIView else {
+        guard let actor = actor as? UIView else {
             return
         }
         actor.center = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -138,9 +135,10 @@ open class YQRefreshHeader: UIView, YQRefresher {
             view?.removeObserver(self, forKeyPath: YQKVOContentOffset, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
         }
         if let scroll = newSuperview as? UIScrollView {
-            self.scrollView = scroll
+            scrollView = scroll
         } else {
-            removeObservers(on: self.superview)
+            removeObservers(on: superview)
         }
+        
     }
 }
