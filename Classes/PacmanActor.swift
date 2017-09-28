@@ -36,7 +36,7 @@ public class PacmanActor: UIView, YQRefreshActor {
     var circleAnimation: CAAnimation!
     public var color: UIColor = UIColor.red {
         didSet {
-            pacmanLayer.fillColor = color.cgColor
+            pacmanLayer.strokeColor = color.cgColor
             circleLayer.fillColor = color.cgColor
         }
     }
@@ -113,7 +113,7 @@ public class PacmanActor: UIView, YQRefreshActor {
         return (pacman,animation)
     }
     
-    func createLayer(with size: CGSize, color: UIColor) -> CAShapeLayer {
+    func createLayer(with size: CGSize, color: UIColor) -> CAShapeLayer {//吃豆人
         let layer: CAShapeLayer = CAShapeLayer()
         let path: UIBezierPath = UIBezierPath()
         path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2),
@@ -131,7 +131,7 @@ public class PacmanActor: UIView, YQRefreshActor {
     
     
     
-    func circle(`in` layer: CALayer, size: CGSize, color: UIColor) -> (CAShapeLayer,CAAnimation){
+    func circle(`in` layer: CALayer, size: CGSize, color: UIColor) -> (CAShapeLayer,CAAnimation) {
         let circleSize = size.width / 5
         let circleDuration: CFTimeInterval = 1
         // Translate animation
@@ -169,7 +169,7 @@ public class PacmanActor: UIView, YQRefreshActor {
         return (circle,animation)
     }
     
-    func createCircleLayer(size: CGSize, color: UIColor) -> CAShapeLayer {
+    func createCircleLayer(size: CGSize, color: UIColor) -> CAShapeLayer { //豆子
         let layer: CAShapeLayer = CAShapeLayer()
         let path: UIBezierPath = UIBezierPath()
         path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2),

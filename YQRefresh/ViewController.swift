@@ -21,6 +21,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self?.tableView.yq.header?.endRefreshing()
             }
         }
+        if let actor = self.tableView.yq.header?.actor as? PacmanActor {
+            actor.color = UIColor.blue
+        }
 
         self.tableView.yq.footer = YQRefreshFooter{[weak self] () in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
