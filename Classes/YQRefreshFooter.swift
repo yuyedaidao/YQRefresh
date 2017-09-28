@@ -10,21 +10,31 @@ import UIKit
 
 public class YQRefreshFooter: UIView, YQRefresher {
 
-    var actor: YQRefreshActor?
-    var action: YQRefreshAction?
-    var refresherHeight: CGFloat = YQRefresherHeight
-    var originalInset: UIEdgeInsets = UIEdgeInsets.zero
-    var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
+    public var actor: YQRefreshActor? {
+        didSet {
+            guard let a = actor as? UIView else {
+                return
+            }
+            if let old = oldValue as? UIView {
+                old.removeFromSuperview()
+            }
+            addSubview(a)
+        }
+    }
+    public var action: YQRefreshAction?
+    public var refresherHeight: CGFloat = YQRefresherHeight
+    public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
+    public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
     var topSpaceConstraint: NSLayoutConstraint!
     var headerRefreshObserver: NSObjectProtocol?
     
-    var state: YQRefreshState = .default {
+    public var state: YQRefreshState = .default {
         didSet {
             switch state {
             case .default:
-                self.resetScrollView()
+                resetScrollView()
             case .refreshing:
-                if let scroll = self.scrollView {
+                if let scroll = scrollView {
                     UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                         let bottom = self.originalInset.bottom + self.refresherHeight
                         scroll.contentInset.bottom = bottom
@@ -36,14 +46,14 @@ public class YQRefreshFooter: UIView, YQRefresher {
                     })
                 }
             case .noMore:
-                self.resetScrollView()
+                resetScrollView()
             default:
                 break
             }
-            self.actor?.state = state
+            actor?.state = state
         }
     }
-    weak var scrollView: UIScrollView? {
+    weak public var scrollView: UIScrollView? {
         didSet {
             if let scroll = scrollView {
                 scroll.addObserver(self, forKeyPath: YQKVOContentOffset, options: .new, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
@@ -52,17 +62,25 @@ public class YQRefreshFooter: UIView, YQRefresher {
         }
     }
     
-    var pullingPercent: Double = 0 {
+    public var pullingPercent: Double = 0 {
         didSet {
-            self.actor?.pullingPrecent = pullingPercent
+            actor?.pullingPrecent = pullingPercent
         }
     }
     
     init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
+        if actor == nil {
+            let actor = FooterActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: refresherHeight)))
+            self.actor = actor
+        }
         super.init(frame: CGRect.zero)
-        self.dealHeaderRefreshNotification()
+        if let actor = self.actor as? UIView {
+            addSubview(actor)
+            
+        }
+        dealHeaderRefreshNotification()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -70,10 +88,19 @@ public class YQRefreshFooter: UIView, YQRefresher {
     }
     
     deinit {
-        if let observer = self.headerRefreshObserver {
+        if let observer = headerRefreshObserver {
             NotificationCenter.default.removeObserver(observer)
         }
     }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let actor = actor as? UIView else {
+            return
+        }
+        actor.center = CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+    
     
     override public func willMove(toSuperview newSuperview: UIView?) {
         func removeObservers(on view: UIView?) {
@@ -81,46 +108,46 @@ public class YQRefreshFooter: UIView, YQRefresher {
             view?.removeObserver(self, forKeyPath: YQKVOContentSize, context: UnsafeMutableRawPointer(&YQKVOContentSize))
         }
         if let scroll = newSuperview as? UIScrollView {
-            self.scrollView = scroll
+            scrollView = scroll
         } else {
-            removeObservers(on: self.superview)
+            removeObservers(on: superview)
         }
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if let scroll = self.scrollView {
+        if let scroll = scrollView {
             if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
                 guard state != .refreshing, state != .noMore else {
                     return
                 }
                 let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                let contentBottom = scroll.contentSize.height + self.originalInset.bottom
+                let contentBottom = scroll.contentSize.height + originalInset.bottom
                 guard visibleMaxY > contentBottom else {
                     return
                 }
-                let percent = (visibleMaxY - contentBottom - self.pullingPercentOffset) / (self.refresherHeight - self.pullingPercentOffset)
-                self.pullingPercent = max(min(Double(percent), 1), 0)
+                let percent = (visibleMaxY - contentBottom - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
+                pullingPercent = max(min(Double(percent), 1), 0)
                 if scroll.isDragging {
-                    let triggerOffset = contentBottom + self.refresherHeight
-                    if self.state == .default && visibleMaxY >= triggerOffset{
-                        self.state = .pulling
-                    } else if self.state == .pulling && visibleMaxY < triggerOffset{
-                        self.state = .default
+                    let triggerOffset = contentBottom + refresherHeight
+                    if state == .default && visibleMaxY >= triggerOffset{
+                        state = .pulling
+                    } else if state == .pulling && visibleMaxY < triggerOffset{
+                        state = .default
                     }
                 } else {
-                    if self.state == .pulling {
-                        self.beginRefreshing()
+                    if state == .pulling {
+                        beginRefreshing()
                     }
                 }
             } else if context == UnsafeMutableRawPointer(&YQKVOContentSize){
-                topSpaceConstraint.constant = scroll.contentSize.height + self.originalInset.bottom
+                topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom
             }
         }
     }
     
     private func resetScrollView() {
-        if let scroll = self.scrollView, scroll.contentInset.bottom != self.originalInset.bottom {
+        if let scroll = scrollView, scroll.contentInset.bottom != originalInset.bottom {
             UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                 let bottom = self.originalInset.bottom
                 scroll.contentInset.bottom = bottom
@@ -130,7 +157,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
     }
     
     private func dealHeaderRefreshNotification() {
-        self.headerRefreshObserver = NotificationCenter.default.addObserver(forName: Notification.Name(YQNotificatonHeaderRefresh), object: nil, queue: nil) { (notification) in
+        headerRefreshObserver = NotificationCenter.default.addObserver(forName: Notification.Name(YQNotificatonHeaderRefresh), object: nil, queue: nil) { (notification) in
             if self.state == .noMore {
                 self.state = .default
             }
@@ -140,17 +167,17 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     //public
     
-    func beginRefreshing() {
-        self.pullingPercent = 1
-        self.state = .refreshing
+    public func beginRefreshing() {
+        pullingPercent = 1
+        state = .refreshing
     }
     
-    func endRefreshing() {
-        self.state = .default
-        self.pullingPercent = 0
+    public func endRefreshing() {
+        state = .default
+        pullingPercent = 0
     }
     
     func hasNoMore() {
-        self.state = .noMore
+        state = .noMore
     }
 }

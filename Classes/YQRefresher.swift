@@ -23,9 +23,9 @@ let YQRefresherAnimationDuration = 0.25
 
 let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
 
-typealias YQRefreshAction = ()->Void
+public typealias YQRefreshAction = ()->Void
 
-protocol YQRefresher {
+public protocol YQRefresher {
     var state: YQRefreshState {get set}
     weak var scrollView: UIScrollView? {get set}
     var pullingPercent: Double {get set}
@@ -57,7 +57,7 @@ public struct YQRefreshContainer: YQRefreshable {
         self.base = base
     }
     
-    var header: YQRefresher? {
+    public var header: YQRefresher? {
         get {
             return base.viewWithTag(headerTag) as? YQRefresher
         }
@@ -81,11 +81,10 @@ public struct YQRefreshContainer: YQRefreshable {
         }
     }
     
-    var footer: YQRefresher? {
+    public var footer: YQRefresher? {
         get {
             return base.viewWithTag(footerTag) as? YQRefresher
         }
-        
         set {
             if let refresher = base.viewWithTag(footerTag) {
                 refresher.removeFromSuperview()
@@ -106,9 +105,9 @@ public struct YQRefreshContainer: YQRefreshable {
     }
 }
 
-extension UIScrollView {
+public extension UIScrollView {
    
-    var yq:YQRefreshContainer {
+    public var yq:YQRefreshContainer {
         get {
             return YQRefreshContainer(self)
         }

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class PacmanActor: UIView, YQRefreshActor {
-    var state: YQRefreshState = .default {
+public class PacmanActor: UIView, YQRefreshActor {
+    public var state: YQRefreshState = .default {
         didSet {
             switch state {
             case .default:
@@ -20,13 +20,12 @@ class PacmanActor: UIView, YQRefreshActor {
             default:
                 break
             }
-            print(state)
         }
     }
     
-    var pullingPrecent: Double = 0 {
+    public var pullingPrecent: Double = 0 {
         didSet {
-            if state == .pulling {
+            if state != .refreshing {
                 mouthSize = pullingPrecent
             }
         }
@@ -35,7 +34,7 @@ class PacmanActor: UIView, YQRefreshActor {
     var circleLayer: CAShapeLayer!
     var pacmanAnimation: CAAnimation!
     var circleAnimation: CAAnimation!
-    var color: UIColor = UIColor.red {
+    public var color: UIColor = UIColor.red {
         didSet {
             pacmanLayer.fillColor = color.cgColor
             circleLayer.fillColor = color.cgColor
@@ -55,12 +54,12 @@ class PacmanActor: UIView, YQRefreshActor {
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setUpAnimation(in: self.layer, size: frame.size, color: color)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2107E6BD1F7B7E5600A7444D /* PacmanActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */; };
+		21CAE88F1F7CDB2700F8D4E3 /* FooterActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CAE88E1F7CDB2700F8D4E3 /* FooterActor.swift */; };
 		55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */; };
 		55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */; };
 		553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AA6381E4D9EE400C97F6B /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacmanActor.swift; sourceTree = "<group>"; };
+		21CAE88E1F7CDB2700F8D4E3 /* FooterActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterActor.swift; sourceTree = "<group>"; };
 		55234EEF1E51C75F00824173 /* CustomRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRefreshHeader.swift; sourceTree = "<group>"; };
 		55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefreshFooter.swift; sourceTree = "<group>"; };
 		553AA6351E4D9EE400C97F6B /* YQRefresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YQRefresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 				553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */,
 				55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */,
 				2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */,
+				21CAE88E1F7CDB2700F8D4E3 /* FooterActor.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				553AA63B1E4D9EE400C97F6B /* ViewController.swift in Sources */,
 				55234EF01E51C75F00824173 /* CustomRefreshHeader.swift in Sources */,
 				553AA66C1E4DA83800C97F6B /* YQRefreshHeader.swift in Sources */,
+				21CAE88F1F7CDB2700F8D4E3 /* FooterActor.swift in Sources */,
 				55234EF41E51CF8B00824173 /* YQRefreshFooter.swift in Sources */,
 				2107E6BD1F7B7E5600A7444D /* PacmanActor.swift in Sources */,
 				553AA6391E4D9EE400C97F6B /* AppDelegate.swift in Sources */,

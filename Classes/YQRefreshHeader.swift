@@ -10,7 +10,7 @@ import UIKit
 
 open class YQRefreshHeader: UIView, YQRefresher {
     
-    var actor: YQRefreshActor? {
+    public var actor: YQRefreshActor? {
         didSet {
             guard let a = actor as? UIView else {
                 return
@@ -21,12 +21,12 @@ open class YQRefreshHeader: UIView, YQRefresher {
             addSubview(a)
         }
     }
-    var action: YQRefreshAction?
-    var refresherHeight: CGFloat = YQRefresherHeight
-    var originalInset: UIEdgeInsets = UIEdgeInsets.zero
-    var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
+    public var action: YQRefreshAction?
+    public var refresherHeight: CGFloat = YQRefresherHeight
+    public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
+    public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
     
-    var state: YQRefreshState = .default {
+    public var state: YQRefreshState = .default {
         didSet {
             switch state {
             case .default:
@@ -55,26 +55,26 @@ open class YQRefreshHeader: UIView, YQRefresher {
             actor?.state = state
         }
     }
-    weak var scrollView: UIScrollView? {
+    weak public var scrollView: UIScrollView? {
         didSet {
             if let scroll = scrollView {
                 scroll.addObserver(self, forKeyPath: YQKVOContentOffset, options: .new, context: UnsafeMutableRawPointer(&YQKVOContentOffset))
             }
         }
     }
-    var pullingPercent: Double = 0 {
+    public var pullingPercent: Double = 0 {
         didSet {
             actor?.pullingPrecent = pullingPercent
         }
     }
 
     
-    func beginRefreshing() {
+    public func beginRefreshing() {
         pullingPercent = 1
         state = .refreshing
     }
     
-    func endRefreshing() {
+    public func endRefreshing() {
         state = .default
         pullingPercent = 0
     }
@@ -88,14 +88,16 @@ open class YQRefreshHeader: UIView, YQRefresher {
             let offsetY = scroll.contentOffset.y
             let triggerOffset = -originalInset.top - refresherHeight
             if scroll.isDragging {
-                if state == .default {
+                if state == .default && offsetY <= triggerOffset{
                     state = .pulling
+                } else if state == .pulling && offsetY > triggerOffset {
+                    state = .default
                 }
             } else {
                 if state == .pulling {
                     if offsetY <= triggerOffset {
                         beginRefreshing()
-                    } else if offsetY >= -originalInset.top  {
+                    } else if offsetY > triggerOffset {
                         state = .default
                     }
                 }
