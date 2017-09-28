@@ -42,10 +42,6 @@ public class YQRefreshFooter: UIView, YQRefresher {
                         let bottom = self.originalInset.bottom + self.refresherHeight
                         scroll.contentInset.bottom = bottom
                         scroll.contentOffset.y = scroll.contentSize.height - scroll.bounds.height + bottom
-                    }, completion: { (isFinished) in
-                        if let action = self.action {
-                            action()
-                        }
                     })
                 }
             case .noMore:
@@ -129,10 +125,8 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 guard visibleMaxY > contentBottom else {
                     return
                 }
-                let percent = (visibleMaxY - contentBottom - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
-                pullingPercent = max(min(Double(percent), 1), 0)
+                let triggerOffset = contentBottom + refresherHeight
                 if scroll.isDragging {
-                    let triggerOffset = contentBottom + refresherHeight
                     if state == .default && visibleMaxY >= triggerOffset{
                         state = .pulling
                     } else if state == .pulling && visibleMaxY < triggerOffset{
@@ -140,9 +134,18 @@ public class YQRefreshFooter: UIView, YQRefresher {
                     }
                 } else {
                     if state == .pulling {
-                        beginRefreshing()
+                        if visibleMaxY >= triggerOffset {
+                            state = .refreshing
+                            if let action = self.action {
+                                action()
+                            }
+                        } else {
+                            state = .default
+                        }
                     }
                 }
+                let percent = (visibleMaxY - contentBottom - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
+                pullingPercent = max(min(Double(percent), 1), 0)
             } else if context == UnsafeMutableRawPointer(&YQKVOContentSize){
                 topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom
             }
@@ -171,13 +174,11 @@ public class YQRefreshFooter: UIView, YQRefresher {
     //public
     
     public func beginRefreshing() {
-        pullingPercent = 1
         state = .refreshing
     }
     
     public func endRefreshing() {
         state = .default
-        pullingPercent = 0
     }
     
     func hasNoMore() {

@@ -45,11 +45,6 @@ open class YQRefreshHeader: UIView, YQRefresher {
                     let top = self.refresherHeight + self.originalInset.top
                     self.scrollView?.contentInset.top = top
                     self.scrollView?.contentOffset.y = -top
-                }, completion: { (isFinished) in
-                    if let action = self.action {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: YQNotificatonHeaderRefresh), object: nil)
-                        action()
-                    }
                 })
                 
             default:
@@ -99,8 +94,12 @@ open class YQRefreshHeader: UIView, YQRefresher {
             } else {
                 if state == .pulling {
                     if offsetY <= triggerOffset {
-                        beginRefreshing()
-                    } else if offsetY > triggerOffset {
+                        state = .refreshing
+                        if let action = self.action {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: YQNotificatonHeaderRefresh), object: nil)
+                            action()
+                        }
+                    } else {
                         state = .default
                     }
                 }
