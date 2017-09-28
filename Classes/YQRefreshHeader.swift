@@ -28,6 +28,9 @@ open class YQRefreshHeader: UIView, YQRefresher {
     
     public var state: YQRefreshState = .default {
         didSet {
+            guard oldValue != state else {
+                return
+            }
             switch state {
             case .default:
                 if scrollView?.contentInset.top != originalInset.top {

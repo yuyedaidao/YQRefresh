@@ -30,6 +30,9 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     public var state: YQRefreshState = .default {
         didSet {
+            guard oldValue != state else {
+                return
+            }
             switch state {
             case .default:
                 resetScrollView()
