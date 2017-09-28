@@ -67,7 +67,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
         }
     }
     
-    public init (_ actor: YQRefreshActor? = nil, _ action: @escaping YQRefreshAction) {
+    public init (actor: YQRefreshActor? = nil, action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
         if actor == nil {

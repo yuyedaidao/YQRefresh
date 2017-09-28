@@ -30,7 +30,7 @@ class CustomRefreshHeader: YQRefreshHeader {
     }
     */
     init(_ action: @escaping YQRefreshAction) {
-        super.init(nil, action)
+        super.init(action: action)
     }
     
     required public init?(coder aDecoder: NSCoder) {

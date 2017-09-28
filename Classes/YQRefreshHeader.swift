@@ -112,7 +112,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
         }
     }
 
-    public init (_ actor: YQRefreshActor? = PacmanActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 45, height: 30))), _ action: @escaping YQRefreshAction) {
+    public init (actor: YQRefreshActor? = PacmanActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 45, height: 30))),  action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
         
