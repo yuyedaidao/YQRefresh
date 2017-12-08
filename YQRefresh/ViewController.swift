@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
         self.tableView.addObserver(self, forKeyPath: "contentInset", options: .new, context: nil)
-        self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 90, right: 0)
+        self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
         self.tableView.yq.header = YQRefreshHeader{[weak self] () in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
                 self?.tableView.yq.header?.endRefreshing()
@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

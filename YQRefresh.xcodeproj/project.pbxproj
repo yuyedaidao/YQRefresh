@@ -219,7 +219,7 @@
 				TargetAttributes = {
 					553AA6341E4D9EE400C97F6B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 97F5F2AF3C;
+						DevelopmentTeam = QXPHWM9EW2;
 						ProvisioningStyle = Automatic;
 					};
 					553AA6481E4D9EE400C97F6B = {
@@ -444,11 +444,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 97F5F2AF3C;
+				DEVELOPMENT_TEAM = QXPHWM9EW2;
 				INFOPLIST_FILE = YQRefresh/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wyq.YQRefresh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iqilu.YQRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -461,11 +461,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 97F5F2AF3C;
+				DEVELOPMENT_TEAM = QXPHWM9EW2;
 				INFOPLIST_FILE = YQRefresh/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wyq.YQRefresh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iqilu.YQRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
