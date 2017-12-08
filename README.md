@@ -10,5 +10,5 @@ github "yuyedaidao/YQRefresh"
 
 ### CocoaPods
 ```
-pod 'YQRefresh'
+pod 'YQRefresh', :git => 'https://github.com/yuyedaidao/YQRefresh.git'
 ```
