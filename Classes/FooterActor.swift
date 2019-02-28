@@ -60,7 +60,7 @@ class FooterActor: UIView, YQRefreshActor {
         addSubview(textLabel)
         addConstraint(NSLayoutConstraint(item: textLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: textLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        indicator = UIActivityIndicatorView(style: .gray)
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(indicator)

@@ -75,7 +75,7 @@ public class PacmanActor: UIView, YQRefreshActor {
     func pacman(`in` layer: CALayer, size: CGSize, color: UIColor) -> (CAShapeLayer,CAAnimation){
         let pacmanSize = 2 * size.width / 3
         let pacmanDuration: CFTimeInterval = 0.5
-        let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        let timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
         
         let strokeStartAnimation = CAKeyframeAnimation(keyPath: "strokeStart")
         
@@ -148,7 +148,7 @@ public class PacmanActor: UIView, YQRefreshActor {
         // Animation
         let animation = CAAnimationGroup()
         animation.animations = [translateAnimation, opacityAnimation]
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = circleDuration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
