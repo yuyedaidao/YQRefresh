@@ -159,6 +159,8 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     private func resetScrollView() {
         if let scroll = scrollView, scroll.contentInset.bottom != originalInset.bottom {
+            let contentOffset = scroll.contentOffset
+            scroll.setContentOffset(contentOffset, animated: false)
             UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                 let bottom = self.originalInset.bottom
                 scroll.contentInset.bottom = bottom
