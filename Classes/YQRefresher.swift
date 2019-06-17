@@ -27,7 +27,7 @@ public typealias YQRefreshAction = ()->Void
 
 public protocol YQRefresher {
     var state: YQRefreshState {get set}
-    weak var scrollView: UIScrollView? {get set}
+    var scrollView: UIScrollView? {get set}
     var pullingPercent: Double {get set}
     var refresherHeight: CGFloat {get}
     /// 如果以开始拖动为百分比计算开始可能会看不到完整动画，所以添加一个偏移量，默认是Refresher高度的一半
@@ -107,7 +107,7 @@ public struct YQRefreshContainer: YQRefreshable {
 
 public extension UIScrollView {
    
-    public var yq:YQRefreshContainer {
+    var yq:YQRefreshContainer {
         get {
             return YQRefreshContainer(self)
         }

@@ -58,14 +58,14 @@ class FooterActor: UIView, YQRefreshActor {
         textLabel.font = UIFont.systemFont(ofSize: 13)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(textLabel)
-        addConstraint(NSLayoutConstraint(item: textLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: textLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        addConstraint(NSLayoutConstraint(item: textLabel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: textLabel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        indicator = UIActivityIndicatorView(style: .gray)
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(indicator)
-        addConstraint(NSLayoutConstraint(item: indicator, attribute: .centerY, relatedBy: .equal, toItem: textLabel, attribute: .centerY, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal, toItem: indicator, attribute: .trailing, multiplier: 1, constant: 4))
+        addConstraint(NSLayoutConstraint(item: indicator!, attribute: .centerY, relatedBy: .equal, toItem: textLabel, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: textLabel!, attribute: .leading, relatedBy: .equal, toItem: indicator, attribute: .trailing, multiplier: 1, constant: 4))
     }
     
 }

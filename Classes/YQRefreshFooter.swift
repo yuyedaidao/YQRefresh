@@ -12,10 +12,10 @@ public class YQRefreshFooter: UIView, YQRefresher {
 
     public var actor: YQRefreshActor? {
         didSet {
-            guard let a = actor as? UIView else {
+            guard let a = actor else {
                 return
             }
-            if let old = oldValue as? UIView {
+            if let old = oldValue {
                 old.removeFromSuperview()
             }
             addSubview(a)
@@ -75,9 +75,8 @@ public class YQRefreshFooter: UIView, YQRefresher {
             self.actor = actor
         }
         super.init(frame: CGRect.zero)
-        if let actor = self.actor as? UIView {
+        if let actor = self.actor {
             addSubview(actor)
-            
         }
         dealHeaderRefreshNotification()
     }
@@ -94,7 +93,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        guard let actor = actor as? UIView else {
+        guard let actor = actor else {
             return
         }
         actor.center = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -178,7 +177,6 @@ public class YQRefreshFooter: UIView, YQRefresher {
     }
     
     //public
-    
     public func beginRefreshing() {
         state = .refreshing
     }

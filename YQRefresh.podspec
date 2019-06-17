@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YQRefresh"
-  s.version      = "0.0.1"
+  s.version      = "0.1.0"
   s.summary      = "Refresher"
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #
 
   s.source       = { :git => "https://github.com/yuyedaidao/YQRefresh.git", :tag => "#{s.version}" }
-
+  s.swift_version = '5.0'
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
