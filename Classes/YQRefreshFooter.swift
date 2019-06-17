@@ -149,10 +149,10 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 var contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
                 let expectedContentHeight = scroll.bounds.height - originalInset.top
                 if contentSize.height < expectedContentHeight{
-                    contentSize.height = expectedContentHeight
-                    scroll.contentSize = contentSize
+                    topSpaceConstraint.constant = expectedContentHeight + originalInset.bottom
+                } else {
+                    topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom
                 }
-                topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom
             }
         }
     }
