@@ -146,7 +146,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 let percent = (visibleMaxY - contentBottom - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
                 pullingPercent = max(min(Double(percent), 1), 0)
             } else if context == UnsafeMutableRawPointer(&YQKVOContentSize){
-                var contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
+                let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
                 let expectedContentHeight = scroll.bounds.height - originalInset.top
                 if contentSize.height < expectedContentHeight{
                     topSpaceConstraint.constant = expectedContentHeight + originalInset.bottom
