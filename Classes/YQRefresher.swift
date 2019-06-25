@@ -40,7 +40,7 @@ public protocol YQRefresher {
     func noMore()
 }
 
-extension YQRefresher {
+public extension YQRefresher {
     func noMore() {}
 }
 
