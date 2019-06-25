@@ -38,10 +38,15 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 resetScrollView()
             case .refreshing:
                 if let scroll = scrollView {
+                    let contentOffset = scroll.contentOffset
+                    scroll.setContentOffset(contentOffset, animated: false)
                     UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
-                        let bottom = self.originalInset.bottom + self.refresherHeight
+                        var bottom = self.originalInset.bottom + self.refresherHeight
+                        if scroll.bounds.height > scroll.contentSize.height {
+                            bottom += scroll.bounds.height - scroll.contentSize.height
+                        }
                         scroll.contentInset.bottom = bottom
-                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
+                        scroll.contentOffset.y = scroll.contentSize.height - scroll.bounds.height + bottom
                     })
                 }
             case .noMore:
