@@ -12,10 +12,10 @@ open class YQRefreshHeader: UIView, YQRefresher {
     
     public var actor: YQRefreshActor? {
         didSet {
-            guard let a = actor as? UIView else {
+            guard let a = actor else {
                 return
             }
-            if let old = oldValue as? UIView {
+            if let old = oldValue {
                 old.removeFromSuperview()
             }
             addSubview(a)
@@ -117,7 +117,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
         self.action = action
         
         super.init(frame: CGRect.zero)
-        if let a = actor as? UIView {
+        if let a = actor {
             addSubview(a)
         }
     }
@@ -128,7 +128,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        guard let actor = actor as? UIView else {
+        guard let actor = actor else {
             return
         }
         actor.center = CGPoint(x: bounds.midX, y: bounds.midY)

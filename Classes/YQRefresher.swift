@@ -107,7 +107,7 @@ public struct YQRefreshContainer: YQRefreshable {
 
 public extension UIScrollView {
    
-    public var yq:YQRefreshContainer {
+    var yq:YQRefreshContainer {
         get {
             return YQRefreshContainer(self)
         }
