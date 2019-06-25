@@ -41,7 +41,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
                     UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                         let bottom = self.originalInset.bottom + self.refresherHeight
                         scroll.contentInset.bottom = bottom
-                        scroll.contentOffset.y = scroll.contentSize.height - scroll.bounds.height + bottom
+                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
                     })
                 }
             case .noMore:
@@ -120,7 +120,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
                     return
                 }
                 let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                let contentBottom = scroll.contentSize.height + originalInset.bottom
+                let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
                 guard visibleMaxY > contentBottom else {
                     return
                 }
@@ -164,7 +164,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
             UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                 let bottom = self.originalInset.bottom
                 scroll.contentInset.bottom = bottom
-                scroll.contentOffset.y = scroll.contentSize.height - scroll.bounds.height + bottom
+                scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
             })
         }
     }
