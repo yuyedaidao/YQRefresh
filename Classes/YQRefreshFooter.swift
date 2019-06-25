@@ -187,7 +187,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
         state = .default
     }
     
-    func hasNoMore() {
+    public func noMore() {
         state = .noMore
     }
 }
