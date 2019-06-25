@@ -37,6 +37,11 @@ public protocol YQRefresher {
     var originalInset: UIEdgeInsets {get set}
     func beginRefreshing()
     func endRefreshing()
+    func noMore()
+}
+
+extension YQRefresher {
+    func noMore() {}
 }
 
 public protocol YQRefreshActor where Self: UIView {

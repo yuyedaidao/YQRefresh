@@ -10,6 +10,7 @@ import UIKit
 
 open class YQRefreshHeader: UIView, YQRefresher {
     
+    
     public var actor: YQRefreshActor? {
         didSet {
             guard let a = actor else {
