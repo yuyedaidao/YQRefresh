@@ -38,7 +38,7 @@ open class YQRefreshHeader: UIView, YQRefresher {
                 if scrollView?.contentInset.top != originalInset.top {
                     isAnimated = true
                     isHidden = false
-                    UIView.animate(withDuration: YQRefresherAnimationDuration * 10, animations: {
+                    UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                         let top = self.originalInset.top
                         self.scrollView?.contentInset.top = top
                         self.scrollView?.contentOffset.y = -top
