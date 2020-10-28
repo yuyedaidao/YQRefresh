@@ -124,15 +124,14 @@ public class YQRefreshFooter: UIView, YQRefresher {
         
         if let scroll = scrollView {
             if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
-                
-                let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
                 if !isAnimating {
-                    isHidden = visibleMaxY <= (contentBottom - refresherHeight)
+                    isHidden = !isVisiable
                 }
                 guard state != .refreshing, state != .noMore else {
                     return
                 }
+                let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
+                let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
                 guard visibleMaxY > contentBottom else {
                     return
                 }
@@ -169,8 +168,22 @@ public class YQRefreshFooter: UIView, YQRefresher {
         }
     }
     
+    private var isVisiable: Bool  {
+        guard let scroll = scrollView else {
+            return false
+        }
+        let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
+        let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
+        return visibleMaxY > (contentBottom - refresherHeight)
+    }
+    
     private func resetScrollView() {
         if let scroll = scrollView, scroll.contentInset.bottom != originalInset.bottom {
+            if !isVisiable {
+                let bottom = self.originalInset.bottom
+                scroll.contentInset.bottom = bottom
+                return
+            }
             isAnimating = true
             isHidden = false
             let contentOffset = scroll.contentOffset
