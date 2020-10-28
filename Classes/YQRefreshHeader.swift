@@ -26,7 +26,8 @@ open class YQRefreshHeader: UIView, YQRefresher {
     public var refresherHeight: CGFloat = YQRefresherHeight
     public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
     public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
-    
+    public var yOffset: CGFloat = 0
+    private var isAnimated = false
     public var state: YQRefreshState = .default {
         didSet {
             guard oldValue != state else {
@@ -35,11 +36,16 @@ open class YQRefreshHeader: UIView, YQRefresher {
             switch state {
             case .default:
                 if scrollView?.contentInset.top != originalInset.top {
-                    UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
+                    isAnimated = true
+                    isHidden = false
+                    UIView.animate(withDuration: YQRefresherAnimationDuration * 10, animations: {
                         let top = self.originalInset.top
                         self.scrollView?.contentInset.top = top
                         self.scrollView?.contentOffset.y = -top
-                    })
+                    }) { (_) in
+                        self.isAnimated = false
+                        self.isHidden = true
+                    }
                 }
             case .refreshing:
                 UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
@@ -47,7 +53,6 @@ open class YQRefreshHeader: UIView, YQRefresher {
                     self.scrollView?.contentInset.top = top
                     self.scrollView?.contentOffset.y = -top
                 })
-                
             default:
                 break
             }
@@ -81,10 +86,13 @@ open class YQRefreshHeader: UIView, YQRefresher {
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if let scroll = scrollView {
+            let offsetY = scroll.contentOffset.y
+            if !isAnimated {
+                self.isHidden = (offsetY >= -originalInset.top)
+            }
             guard state != .refreshing else {
                 return
             }
-            let offsetY = scroll.contentOffset.y
             let triggerOffset = -originalInset.top - refresherHeight
             if scroll.isDragging {
                 if state == .default && offsetY <= triggerOffset{

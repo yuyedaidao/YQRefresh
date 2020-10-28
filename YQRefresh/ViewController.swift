@@ -15,12 +15,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
         self.tableView.addObserver(self, forKeyPath: "contentInset", options: .new, context: nil)
-        self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        self.tableView.yq.header = YQRefreshHeader{[weak self] () in
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+       
+        let header = YQRefreshHeader{[weak self] () in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                 self?.tableView.yq.header?.endRefreshing()
             }
         }
+        
+        if #available(iOS 11.0, *) {
+            let yOffset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
+            self.tableView.contentInsetAdjustmentBehavior = .never
+            header.yOffset = yOffset
+            self.tableView.contentInset = UIEdgeInsets(top: yOffset, left: 0, bottom: 0, right: 0)
+        } else {
+            // Fallback on earlier versions
+        }
+        self.tableView.yq.header = header
         if let actor = self.tableView.yq.header?.actor as? PacmanActor {
             actor.color = UIColor.blue
         }

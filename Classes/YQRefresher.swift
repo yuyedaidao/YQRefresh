@@ -35,6 +35,7 @@ public protocol YQRefresher {
     var actor: YQRefreshActor? {get set}
     var action: YQRefreshAction? {get set}
     var originalInset: UIEdgeInsets {get set}
+    var yOffset: CGFloat {get set}
     func beginRefreshing()
     func endRefreshing()
     func noMore()
@@ -79,7 +80,7 @@ public struct YQRefreshContainer: YQRefreshable {
                 refresher.addConstraint(NSLayoutConstraint(item: refresher, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: YQRefresherHeight))
                 base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .width, relatedBy: .equal, toItem: base, attribute: .width, multiplier: 1, constant: 0))
                 base.addConstraint(NSLayoutConstraint(item: base, attribute: .leading, relatedBy: .equal, toItem: refresher, attribute: .leading, multiplier: 1, constant: 0))
-                base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top))
+                base.addConstraint(NSLayoutConstraint(item: refresher, attribute: .bottom, relatedBy: .equal, toItem: base, attribute: .top, multiplier: 1, constant: -refresher.originalInset.top + refresher.yOffset))
                 base.superview?.setNeedsLayout()
                 base.superview?.layoutIfNeeded()
             }

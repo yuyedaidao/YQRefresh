@@ -9,6 +9,7 @@
 import UIKit
 
 public class YQRefreshFooter: UIView, YQRefresher {
+    
 
     public var actor: YQRefreshActor? {
         didSet {
@@ -25,6 +26,8 @@ public class YQRefreshFooter: UIView, YQRefresher {
     public var refresherHeight: CGFloat = YQRefresherHeight
     public var originalInset: UIEdgeInsets = UIEdgeInsets.zero
     public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
+    public var yOffset: CGFloat = 0
+    private var isAnimating = false
     var topSpaceConstraint: NSLayoutConstraint!
     var headerRefreshObserver: NSObjectProtocol?
     
@@ -121,11 +124,15 @@ public class YQRefreshFooter: UIView, YQRefresher {
         
         if let scroll = scrollView {
             if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
+                
+                let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
+                let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
+                if !isAnimating {
+                    isHidden = visibleMaxY <= (contentBottom - refresherHeight)
+                }
                 guard state != .refreshing, state != .noMore else {
                     return
                 }
-                let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                let contentBottom = max(scroll.contentSize.height, scroll.bounds.height) + originalInset.bottom
                 guard visibleMaxY > contentBottom else {
                     return
                 }
@@ -154,9 +161,9 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
                 let expectedContentHeight = scroll.bounds.height - originalInset.top
                 if contentSize.height < expectedContentHeight{
-                    topSpaceConstraint.constant = expectedContentHeight + originalInset.bottom
+                    topSpaceConstraint.constant = expectedContentHeight + originalInset.bottom + yOffset
                 } else {
-                    topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom
+                    topSpaceConstraint.constant = scroll.contentSize.height + originalInset.bottom + yOffset
                 }
             }
         }
@@ -164,13 +171,18 @@ public class YQRefreshFooter: UIView, YQRefresher {
     
     private func resetScrollView() {
         if let scroll = scrollView, scroll.contentInset.bottom != originalInset.bottom {
+            isAnimating = true
+            isHidden = false
             let contentOffset = scroll.contentOffset
             scroll.setContentOffset(contentOffset, animated: false)
             UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                 let bottom = self.originalInset.bottom
                 scroll.contentInset.bottom = bottom
                 scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
-            })
+            }) { (_) in
+                self.isAnimating = false
+                self.isHidden = true
+            }
         }
     }
     
