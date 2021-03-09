@@ -189,14 +189,16 @@ public class YQRefreshFooter: UIView, YQRefresher {
             isHidden = false
             let contentOffset = scroll.contentOffset
             scroll.setContentOffset(contentOffset, animated: false)
-            UIView.animate(withDuration: 0) {} completion: { (_) in
-                UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
-                    let bottom = self.originalInset.bottom
-                    scroll.contentInset.bottom = bottom
-                    scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
-                }) { (_) in
-                    self.isAnimating = false
-                    self.isHidden = true
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0) {} completion: { (_) in
+                    UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
+                        let bottom = self.originalInset.bottom
+                        scroll.contentInset.bottom = bottom
+                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
+                    }) { (_) in
+                        self.isAnimating = false
+                        self.isHidden = true
+                    }
                 }
             }
         }
