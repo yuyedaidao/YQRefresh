@@ -194,7 +194,8 @@ public class YQRefreshFooter: UIView, YQRefresher {
                     UIView.animate(withDuration: YQRefresherAnimationDuration, animations: {
                         let bottom = self.originalInset.bottom
                         scroll.contentInset.bottom = bottom
-                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
+                        // MARK: 下边注释的这句当时为什么这样处理来，没道理，现在去掉
+//                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
                     }) { (_) in
                         self.isAnimating = false
                         self.isHidden = true
