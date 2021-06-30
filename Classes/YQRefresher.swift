@@ -18,7 +18,7 @@ public enum YQRefreshState {
 var YQKVOContentOffset = "contentOffset"
 var YQKVOContentSize = "contentSize"
 
-let YQRefresherHeight: CGFloat = 60.0
+public let YQRefresherHeight: CGFloat = 60.0
 let YQRefresherAnimationDuration = 0.25
 
 let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
@@ -109,6 +109,13 @@ public struct YQRefreshContainer: YQRefreshable {
 
         }
     }
+}
+
+public class YQRefreshActorProvider {
+    public static let shared = YQRefreshActorProvider()
+    private init() {}
+    public var headerActor: YQRefreshActor?
+    public var footerActor: YQRefreshActor?
 }
 
 public extension UIScrollView {

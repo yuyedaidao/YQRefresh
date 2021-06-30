@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FooterActor: UIView, YQRefreshActor {
-    var state: YQRefreshState = .default {
+public class FooterActor: UIView, YQRefreshActor {
+    public var state: YQRefreshState = .default {
         didSet {
             if oldValue != state {
                 textLabel.text = titles[state]
@@ -26,7 +26,7 @@ class FooterActor: UIView, YQRefreshActor {
             }
         }
     }
-    var pullingPrecent: Double = 0
+    public var pullingPrecent: Double = 0
     
     var textLabel: UILabel!
     var indicator: UIActivityIndicatorView!
@@ -37,7 +37,7 @@ class FooterActor: UIView, YQRefreshActor {
                                             .noMore: "没有更多了"
                                             ]
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         prepareViews()
     }
