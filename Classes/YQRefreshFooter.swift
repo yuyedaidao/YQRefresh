@@ -79,7 +79,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
         }
     }
     
-    public init (actor: YQRefreshActor? = YQRefreshActorProvider.shared.footerActor ?? FooterActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: YQRefresherHeight))), action: @escaping YQRefreshAction) {
+    public init (actor: YQRefreshActor? = YQRefreshActorProvider.shared.footerActor?() ?? FooterActor(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: YQRefresherHeight))), action: @escaping YQRefreshAction) {
         self.actor = actor
         self.action = action
         

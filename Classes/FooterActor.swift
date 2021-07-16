@@ -34,7 +34,7 @@ public class FooterActor: UIView, YQRefreshActor {
     var titles:[YQRefreshState : String] = [.default: "加载更多",
                                             .pulling: "加载更多",
                                             .refreshing: "加载中...",
-                                            .noMore: "没有更多了"
+                                            .noMore: "暂无更多"
                                             ]
     
     public override init(frame: CGRect) {

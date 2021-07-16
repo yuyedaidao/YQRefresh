@@ -114,8 +114,8 @@ public struct YQRefreshContainer: YQRefreshable {
 public class YQRefreshActorProvider {
     public static let shared = YQRefreshActorProvider()
     private init() {}
-    public var headerActor: YQRefreshActor?
-    public var footerActor: YQRefreshActor?
+    public var headerActor: (() -> YQRefreshActor)?
+    public var footerActor: (() -> YQRefreshActor)?
 }
 
 public extension UIScrollView {
