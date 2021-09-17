@@ -53,6 +53,13 @@ open class YQRefreshHeader: UIView, YQRefresher {
                     self.scrollView?.contentInset.top = top
                     self.scrollView?.contentOffset.y = -top
                 })
+            case .pulling:
+                guard let scrollView = scrollView, scrollView.isTracking else {
+                    break
+                }
+                if #available(iOS 10.0, *) {
+                    UIImpactFeedbackGenerator().impactOccurred()
+                }
             default:
                 break
             }

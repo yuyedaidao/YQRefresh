@@ -58,8 +58,13 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 }
             case .noMore:
                 resetScrollView()
-            default:
-                break
+            case .pulling:
+                guard let scrollView = scrollView, scrollView.isTracking else {
+                    break
+                }
+                if #available(iOS 10.0, *) {
+                    UIImpactFeedbackGenerator().impactOccurred()
+                }
             }
             actor?.state = state
         }
