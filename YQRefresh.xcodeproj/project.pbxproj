@@ -91,6 +91,7 @@
 		553AA65A1E4D9EE400C97F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		553AA6671E4DA37300C97F6B /* YQRefresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefresher.swift; sourceTree = "<group>"; };
 		553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQRefreshHeader.swift; sourceTree = "<group>"; };
+		55B8D82026F5FF09009904DA /* YQAutoRefreshFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YQAutoRefreshFooter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +197,7 @@
 				553AA6671E4DA37300C97F6B /* YQRefresher.swift */,
 				553AA66B1E4DA83800C97F6B /* YQRefreshHeader.swift */,
 				55234EF31E51CF8B00824173 /* YQRefreshFooter.swift */,
+				55B8D82026F5FF09009904DA /* YQAutoRefreshFooter.swift */,
 				2107E6BC1F7B7E5600A7444D /* PacmanActor.swift */,
 				21CAE88E1F7CDB2700F8D4E3 /* FooterActor.swift */,
 			);
