@@ -12,3 +12,4 @@ github "yuyedaidao/YQRefresh"
 ```
 pod 'YQRefresh', :git => 'https://github.com/yuyedaidao/YQRefresh.git'
 ```
+### Example

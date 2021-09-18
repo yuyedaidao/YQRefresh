@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="veC-XT-Cnl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="veC-XT-Cnl">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,7 +44,7 @@
                         <constraints>
                             <constraint firstItem="cEC-p0-8k5" firstAttribute="width" secondItem="wJB-c5-IPX" secondAttribute="width" id="1ty-bU-hoH"/>
                             <constraint firstItem="cEC-p0-8k5" firstAttribute="leading" secondItem="wJB-c5-IPX" secondAttribute="leading" id="DYT-GM-wH8"/>
-                            <constraint firstItem="ukk-Uw-UKs" firstAttribute="top" secondItem="cEC-p0-8k5" secondAttribute="bottom" id="bvn-8X-5Ve"/>
+                            <constraint firstAttribute="bottom" secondItem="cEC-p0-8k5" secondAttribute="bottom" id="bvn-8X-5Ve"/>
                             <constraint firstItem="cEC-p0-8k5" firstAttribute="top" secondItem="wJB-c5-IPX" secondAttribute="top" id="tGJ-EN-NKd"/>
                         </constraints>
                     </view>

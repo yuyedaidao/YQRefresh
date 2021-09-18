@@ -141,14 +141,14 @@ public class YQRefreshFooter: UIView, YQRefresher {
                 }
                 let triggerOffset = contentBottom + refresherHeight
                 if scroll.isDragging {
-                    if state == .default && visibleMaxY >= triggerOffset{
+                    if state == .default && visibleMaxY >= triggerOffset {
                         state = .pulling
                     } else if state == .pulling && visibleMaxY < triggerOffset {
                         state = .default
                     }
                 } else {
                     if state == .pulling {
-                        if visibleMaxY >= triggerOffset {
+                        if visibleMaxY >= triggerOffset - 10 { // 拉开一点距离，增大松手后的触发率
                             state = .refreshing
                             if let action = self.action {
                                 action()
