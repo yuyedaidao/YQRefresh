@@ -1,6 +1,0 @@
-framework module YQRefresh {
-  umbrella header "YQRefresh-umbrella.h"
-
-  export *
-  module * { export * }
-}
