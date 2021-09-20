@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YQRefresh
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -42,10 +43,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            }
 //        }
         self.tableView.yq.footer = YQAutoRefreshFooter { [weak self] in
+            guard let self = self else {return}
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-                self?.count += Int.random(in: 1 ... 4)
-                self?.tableView.reloadData()
-                self?.tableView.yq.footer?.endRefreshing()
+                self.count += Int.random(in: 3 ... 9)
+                self.tableView.reloadData()
+                if self.count > 30 {
+                    self.tableView.yq.footer?.noMore()
+                } else {
+                    self.tableView.yq.footer?.endRefreshing()
+                }
             }
         }
         self.tableView.delegate = self

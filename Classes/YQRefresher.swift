@@ -25,7 +25,7 @@ let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
 
 public typealias YQRefreshAction = ()->Void
 
-public protocol YQRefresher {
+public protocol Refresher where Self: UIView {
     var state: YQRefreshState {get set}
     var scrollView: UIScrollView? {get set}
     var pullingPercent: Double {get set}
@@ -38,11 +38,11 @@ public protocol YQRefresher {
     var yOffset: CGFloat {get set}
     func beginRefreshing()
     func endRefreshing()
-    func noMore()
 }
 
-public extension YQRefresher {
-    func noMore() {}
+public protocol FooterRefresher: Refresher {
+    func noMore()
+    var topSpaceConstraint: NSLayoutConstraint! { get set}
 }
 
 public protocol YQRefreshActor where Self: UIView {
@@ -51,8 +51,8 @@ public protocol YQRefreshActor where Self: UIView {
 }
 
 protocol YQRefreshable {
-    var header: YQRefresher? {get set}
-    var footer: YQRefresher? {get set}
+    var header: Refresher? {get set}
+    var footer: FooterRefresher? {get set}
 }
 
 public struct YQRefreshContainer: YQRefreshable {
@@ -63,16 +63,16 @@ public struct YQRefreshContainer: YQRefreshable {
         self.base = base
     }
     
-    public var header: YQRefresher? {
+    public var header: Refresher? {
         get {
-            return base.viewWithTag(headerTag) as? YQRefresher
+            return base.viewWithTag(headerTag) as? Refresher
         }
         
         set {
             if let refresher = base.viewWithTag(headerTag) {
                 refresher.removeFromSuperview()
             }
-            if let refresher =  newValue as? YQRefreshHeader {
+            if let refresher =  newValue {
                 refresher.tag = headerTag
                 refresher.translatesAutoresizingMaskIntoConstraints = false
                 refresher.originalInset = base.contentInset
@@ -87,15 +87,15 @@ public struct YQRefreshContainer: YQRefreshable {
         }
     }
     
-    public var footer: YQRefresher? {
+    public var footer: FooterRefresher? {
         get {
-            return base.viewWithTag(footerTag) as? YQRefresher
+            return base.viewWithTag(footerTag) as? FooterRefresher
         }
         set {
             if let refresher = base.viewWithTag(footerTag) {
                 refresher.removeFromSuperview()
             }
-            if let refresher = newValue as? YQRefreshFooter {
+            if let refresher = newValue {
                 refresher.tag = footerTag
                 refresher.originalInset = base.contentInset
                 refresher.translatesAutoresizingMaskIntoConstraints = false
@@ -120,7 +120,7 @@ public class YQRefreshActorProvider {
 
 public extension UIScrollView {
    
-    var yq:YQRefreshContainer {
+    var yq: YQRefreshContainer {
         get {
             return YQRefreshContainer(self)
         }

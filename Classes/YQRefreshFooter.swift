@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class YQRefreshFooter: UIView, YQRefresher {
+public class YQRefreshFooter: UIView, FooterRefresher {
     
     public var actor: YQRefreshActor? {
         didSet {
-            guard let a = actor else {
+            guard let actor = actor else {
                 return
             }
             if let old = oldValue {
                 old.removeFromSuperview()
             }
-            addSubview(a)
+            addSubview(actor)
         }
     }
     public var action: YQRefreshAction?
@@ -27,7 +27,7 @@ public class YQRefreshFooter: UIView, YQRefresher {
     public var pullingPercentOffset: CGFloat = YQRefresherHeight / 2
     public var yOffset: CGFloat = 0
     private var isAnimating = false
-    var topSpaceConstraint: NSLayoutConstraint!
+    public var topSpaceConstraint: NSLayoutConstraint!
     var headerRefreshObserver: NSObjectProtocol?
     
     public var state: YQRefreshState = .default {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class YQRefreshHeader: UIView, YQRefresher {
+open class YQRefreshHeader: UIView, Refresher {
     
     
     public var actor: YQRefreshActor? {
