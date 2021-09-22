@@ -28,7 +28,7 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
     public var yOffset: CGFloat = 0
     public var topSpaceConstraint: NSLayoutConstraint!
     var headerRefreshObserver: NSObjectProtocol?
-        
+    private var triggerOffset = CGFloat.infinity
     public var state: YQRefreshState = .default {
         didSet {
             guard oldValue != state else {
@@ -101,32 +101,32 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if let scroll = scrollView {
             if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
-        
-                guard state != .refreshing, state != .noMore else {
+                guard state != .noMore else {
+                    return
+                }
+                guard state != .refreshing else {
                     return
                 }
                 let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                let contentBottom = max(scroll.contentSize.height + originalInset.bottom, scroll.bounds.height)
-                let triggerOffset = contentBottom - 10 // 差10像素展示前就加载
                 guard visibleMaxY >= triggerOffset else {
                     return
                 }
                 if state != .refreshing {
-                    if visibleMaxY >= triggerOffset { // 这里有点重复
+                    if visibleMaxY > triggerOffset {
                         state = .refreshing
                         if let action = self.action {
                             action()
                         }
                     }
                 }
-                let percent = (visibleMaxY - contentBottom - pullingPercentOffset) / (refresherHeight - pullingPercentOffset)
-                pullingPercent = max(min(Double(percent), 1), 0)
             } else if context == UnsafeMutableRawPointer(&YQKVOContentSize) {
                 let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
                 if contentSize.height < scroll.bounds.height {
                     topSpaceConstraint.constant = scroll.bounds.height + yOffset
+                    triggerOffset = scroll.bounds.height + refresherHeight / 2
                 } else {
                     topSpaceConstraint.constant = contentSize.height + yOffset
+                    triggerOffset = contentSize.height + refresherHeight
                 }
             }
         }
