@@ -38,6 +38,38 @@
             endingLineNumber = "215"
             landmarkName = "dealHeaderRefreshNotification()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "12060BAC-0F17-42E4-8B0D-4D9D7BB9EA54 - 557ebf1fe43c989e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Foundation.Notification) -&gt; () in YQRefresh.YQRefreshFooter.dealHeaderRefreshNotification() -&gt; ()"
+                  moduleName = "YQRefresh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wyq/Work/Project/2103/YQRefresh/Classes/YQRefreshFooter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "716">
+               </Location>
+               <Location
+                  uuid = "12060BAC-0F17-42E4-8B0D-4D9D7BB9EA54 - 557ebf1fe43c989e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Foundation.Notification) -&gt; () in YQRefresh.YQRefreshFooter.dealHeaderRefreshNotification() -&gt; ()"
+                  moduleName = "YQRefresh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wyq/Work/Project/2103/YQRefresh/Classes/YQRefreshFooter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "716">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
