@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self?.tableView.yq.footer?.endRefreshing()
             }
         }
-        self.tableView.yq.footer?.backgroundColor = UIColor.red
+//        self.tableView.yq.footer?.backgroundColor = UIColor.red
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
