@@ -112,7 +112,7 @@ open class YQRefreshHeader: UIView, Refresher {
                     if offsetY <= triggerOffset + 10 { // 拉开一点距离，增大触发率
                         state = .refreshing
                         if let action = self.action {
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: YQNotificatonHeaderRefresh), object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: YQNotificatonHeaderRefresh), object: self.scrollView)
                             action()
                         }
                     } else {

@@ -42,8 +42,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            }
 //        }
         self.tableView.yq.footer = YQAutoRefreshFooter { [weak self] in
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-                self?.count += Int.random(in: 1 ... 4)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                let count = Int.random(in: 0 ... 4)
+                guard count > 0 else {
+                    self?.tableView.yq.footer?.noMore()
+                    return
+                }
+                self?.count += count
                 self?.tableView.reloadData()
                 self?.tableView.yq.footer?.endRefreshing()
             }

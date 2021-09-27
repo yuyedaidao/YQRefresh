@@ -142,7 +142,10 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
     }
         
     private func dealHeaderRefreshNotification() {
-        headerRefreshObserver = NotificationCenter.default.addObserver(forName: Notification.Name(YQNotificatonHeaderRefresh), object: nil, queue: nil) { _ in
+        headerRefreshObserver = NotificationCenter.default.addObserver(forName: Notification.Name(YQNotificatonHeaderRefresh), object: nil, queue: nil) {[weak self] notificiation in
+            guard let self = self, let view = notificiation.object as? UIScrollView, view == self.scrollView else {
+                return
+            }
             if self.state == .noMore {
                 self.state = .default
             }
