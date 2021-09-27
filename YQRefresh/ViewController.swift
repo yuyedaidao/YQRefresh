@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let yOffset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
             self.tableView.contentInsetAdjustmentBehavior = .never
             header.yOffset = yOffset
-            self.tableView.contentInset = UIEdgeInsets(top: yOffset, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(top: yOffset, left: 0, bottom: 34, right: 0)
         } else {
             // Fallback on earlier versions
         }
@@ -43,7 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
         self.tableView.yq.footer = YQAutoRefreshFooter { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                let count = Int.random(in: 0 ... 4)
+                let count = Int.random(in: 0 ... 14)
                 guard count > 0 else {
                     self?.tableView.yq.footer?.noMore()
                     return
@@ -53,6 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self?.tableView.yq.footer?.endRefreshing()
             }
         }
+        self.tableView.yq.footer?.backgroundColor = UIColor.red
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))

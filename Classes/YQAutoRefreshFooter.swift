@@ -93,52 +93,54 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
             contentInset.bottom += refresherHeight
             scroll.contentInset = contentInset
             scrollView = scroll
+            if scroll.contentSize == .zero {
+                isVisiable = false
+            }
         } else {
             removeObservers(on: superview)
         }
     }
         
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if let scroll = scrollView {
-            if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
-                guard state != .noMore else {
-                    return
-                }
-                guard state != .refreshing else {
-                    return
-                }
-                let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-                guard visibleMaxY >= triggerOffset else {
-                    return
-                }
-                if state != .refreshing {
-                    if visibleMaxY > triggerOffset {
-                        state = .refreshing
-                        if let action = self.action {
-                            action()
-                        }
+        guard let scroll = scrollView else {return}
+        if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
+            guard isVisiable else {return}
+            guard state != .noMore, state != .refreshing else {
+                return
+            }
+            let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height + scroll.contentInset.top
+            guard visibleMaxY >= triggerOffset else {
+                return
+            }
+            if state != .refreshing {
+                if visibleMaxY > triggerOffset {
+                    state = .refreshing
+                    if let action = self.action {
+                        action()
                     }
                 }
-            } else if context == UnsafeMutableRawPointer(&YQKVOContentSize) {
-                let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
-                if contentSize.height < scroll.bounds.height {
-                    topSpaceConstraint.constant = scroll.bounds.height + yOffset
+            }
+        } else if context == UnsafeMutableRawPointer(&YQKVOContentSize) {
+            let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
+            if contentSize == .zero {
+                isVisiable = false
+            } else {
+                if contentSize.height <= scroll.bounds.height {
                     triggerOffset = scroll.bounds.height + refresherHeight / 2
                 } else {
-                    topSpaceConstraint.constant = contentSize.height + yOffset
                     triggerOffset = contentSize.height + refresherHeight
                 }
+                topSpaceConstraint.constant = contentSize.height + yOffset
+                isVisiable = true
             }
         }
+    
     }
         
-    private var isVisiable: Bool {
-        guard let scroll = scrollView else {
-            return false
+    private var isVisiable: Bool = true {
+        didSet {
+            isHidden = !isVisiable
         }
-        let visibleMaxY = scroll.contentOffset.y + scroll.bounds.height
-        let footerTop = max(scroll.contentSize.height, scroll.bounds.height)
-        return visibleMaxY > footerTop
     }
         
     private func dealHeaderRefreshNotification() {
