@@ -122,7 +122,7 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
             }
         } else if context == UnsafeMutableRawPointer(&YQKVOContentSize) {
             let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
-            if contentSize == .zero {
+            if contentSize.height < 1 {
                 isVisiable = false
             } else {
                 if contentSize.height <= scroll.bounds.height {
