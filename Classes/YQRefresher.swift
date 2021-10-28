@@ -42,6 +42,8 @@ public protocol Refresher where Self: UIView {
 
 public protocol FooterRefresher: Refresher {
     func noMore()
+    func reset()
+    var automaticVisiable: Bool {get set}
     var topSpaceConstraint: NSLayoutConstraint! { get set}
 }
 

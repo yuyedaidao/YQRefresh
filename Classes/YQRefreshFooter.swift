@@ -9,7 +9,8 @@
 import UIKit
 
 public class YQRefreshFooter: UIView, FooterRefresher {
-    
+
+    public var automaticVisiable: Bool = true
     public var actor: YQRefreshActor? {
         didSet {
             guard let actor = actor else {
@@ -129,7 +130,9 @@ public class YQRefreshFooter: UIView, FooterRefresher {
         if let scroll = scrollView {
             if context == UnsafeMutableRawPointer(&YQKVOContentOffset) {
                 if !isAnimating {
-                    isHidden = !isVisiable
+                    if automaticVisiable {
+                        isHidden = !isVisiable
+                    }
                 }
                 guard state != .refreshing, state != .noMore else {
                     return
@@ -188,7 +191,9 @@ public class YQRefreshFooter: UIView, FooterRefresher {
                 return
             }
             isAnimating = true
-            isHidden = false
+            if automaticVisiable {
+                isHidden = false
+            }
             let contentOffset = scroll.contentOffset
             scroll.setContentOffset(contentOffset, animated: false)
             DispatchQueue.main.async {
@@ -200,7 +205,9 @@ public class YQRefreshFooter: UIView, FooterRefresher {
 //                        scroll.contentOffset.y = max(scroll.contentSize.height, scroll.bounds.height) - scroll.bounds.height + bottom
                     }) { (_) in
                         self.isAnimating = false
-                        self.isHidden = true
+                        if self.automaticVisiable {
+                            self.isHidden = true
+                        }
                     }
                 }
             }
@@ -229,5 +236,9 @@ public class YQRefreshFooter: UIView, FooterRefresher {
     
     public func noMore() {
         state = .noMore
+    }
+    
+    public func reset() {
+        state = .default
     }
 }

@@ -9,6 +9,8 @@
 import UIKit
 
 public class YQAutoRefreshFooter: UIView, FooterRefresher {
+    public var automaticVisiable: Bool = true
+    
     public var actor: YQRefreshActor? {
         didSet {
             guard let actor = actor else {
@@ -139,6 +141,9 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
         
     private var isVisiable: Bool = true {
         didSet {
+            guard automaticVisiable else {
+                return
+            }
             isHidden = !isVisiable
         }
     }
@@ -165,5 +170,9 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
         
     public func noMore() {
         state = .noMore
+    }
+    
+    public func reset() {
+        state = .default
     }
 }
