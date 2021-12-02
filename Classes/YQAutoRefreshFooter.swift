@@ -62,8 +62,19 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
         super.init(frame: CGRect.zero)
         if let actor = self.actor {
             addSubview(actor)
+            isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+            addGestureRecognizer(tap)
         }
         dealHeaderRefreshNotification()
+    }
+    
+    @objc func tapAction() {
+        guard state == .default, let action = action else {
+            return
+        }
+        beginRefreshing()
+        action()
     }
         
     @available(*, unavailable)

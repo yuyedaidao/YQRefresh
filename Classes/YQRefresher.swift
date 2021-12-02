@@ -23,7 +23,7 @@ let YQRefresherAnimationDuration = 0.25
 
 let YQNotificatonHeaderRefresh = "YQNotificatonHeaderRefresh"
 
-public typealias YQRefreshAction = ()->Void
+public typealias YQRefreshAction = () -> Void
 
 public protocol Refresher where Self: UIView {
     var state: YQRefreshState {get set}
