@@ -45,6 +45,8 @@ public protocol FooterRefresher: Refresher {
     func reset()
     var automaticVisiable: Bool {get set}
     var topSpaceConstraint: NSLayoutConstraint! { get set}
+    /// 此高度及以下都当做依附的ScrollView没有内容
+    var emptyContentHeight: CGFloat {get set}
 }
 
 public protocol YQRefreshActor where Self: UIView {

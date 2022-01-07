@@ -10,7 +10,14 @@ import UIKit
 
 public class YQAutoRefreshFooter: UIView, FooterRefresher {
     public var automaticVisiable: Bool = true
-    
+    public var emptyContentHeight: CGFloat = 1 {
+        didSet {
+            guard let scrollView = scrollView else {
+                return
+            }
+            isVisiable = scrollView.contentSize.height <= emptyContentHeight
+        }
+    }
     public var actor: YQRefreshActor? {
         didSet {
             guard let actor = actor else {
@@ -22,7 +29,6 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
             addSubview(actor)
         }
     }
-
     public var action: YQRefreshAction?
     public var refresherHeight: CGFloat = YQRefresherHeight
     public var originalInset = UIEdgeInsets.zero
@@ -106,7 +112,7 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
             contentInset.bottom += refresherHeight
             scroll.contentInset = contentInset
             scrollView = scroll
-            if scroll.contentSize == .zero {
+            if scroll.contentSize.height <= emptyContentHeight {
                 isVisiable = false
             }
         } else {
@@ -135,7 +141,7 @@ public class YQAutoRefreshFooter: UIView, FooterRefresher {
             }
         } else if context == UnsafeMutableRawPointer(&YQKVOContentSize) {
             let contentSize = change![NSKeyValueChangeKey.newKey] as! CGSize
-            if contentSize.height < 1 {
+            if contentSize.height <= emptyContentHeight {
                 isVisiable = false
             } else {
                 if contentSize.height <= scroll.bounds.height {

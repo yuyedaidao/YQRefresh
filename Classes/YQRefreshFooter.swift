@@ -9,7 +9,7 @@
 import UIKit
 
 public class YQRefreshFooter: UIView, FooterRefresher {
-
+    public var emptyContentHeight: CGFloat = 1
     public var automaticVisiable: Bool = true
     public var actor: YQRefreshActor? {
         didSet {
