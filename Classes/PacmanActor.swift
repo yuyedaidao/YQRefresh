@@ -45,7 +45,7 @@ public class PacmanActor: UIView, YQRefreshActor {
             if let layer = self.pacmanLayer { 
                 let path: UIBezierPath = UIBezierPath()
                 let size = layer.bounds.size
-                let angle = CGFloat((min(max(mouthSize, 0.2), 1.0)-0.2)/0.7 * (Double.pi / 2.0)/2.0)
+                let angle: CGFloat = CGFloat((min(max(mouthSize, 0.2), 1.0) - 0.2) / 0.7 * (Double.pi / 2.0) / 2.0)
                 path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2), radius: size.width / 4, startAngle: angle, endAngle: angle > 0 ? -angle : CGFloat.pi * 2, clockwise: true)
                 
                 self.pacmanLayer.path = path.cgPath
